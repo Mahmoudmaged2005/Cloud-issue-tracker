@@ -1,0 +1,8 @@
+$kind: http-request
+name: "{{BASE_URL}}/api/issues"
+url: "{{BASE_URL}}/api/issues"
+method: GET
+body:
+  type: json
+  content: ""
+order: 777686791420143

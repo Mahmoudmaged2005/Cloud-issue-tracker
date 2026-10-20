@@ -1,0 +1,8 @@
+$kind: http-request
+name: "{{BASE_URL}}/api/issues/510453f8-928a-44c7-85bc-7b8e4ccb4b0a/status"
+url: "{{BASE_URL}}/api/issues/510453f8-928a-44c7-85bc-7b8e4ccb4b0a/status"
+method: PATCH
+body:
+  type: json
+  content: "{\r\n  \"status\": \"Resolved\"\r\n}"
+order: 1831402599007109

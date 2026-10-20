@@ -1,0 +1,16 @@
+$kind: http-request
+name: "{{BASE_URL}}/api/issues"
+url: "{{BASE_URL}}/api/issues"
+method: POST
+body:
+  type: json
+  content: "{ \r
+
+    \"title\": \"Printer unavailable\", \r
+
+    \"description\": \"The shared printer is not responding.\", \r
+
+    \"priority\": \"Medium\" \r
+
+    }"
+order: 4270801563878660

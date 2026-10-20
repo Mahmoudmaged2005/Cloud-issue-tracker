@@ -1,0 +1,8 @@
+$kind: http-request
+url: "{{BASE_URL}}/api/issues"
+method: GET
+headers:
+  - key: Authorization
+    value: Bearer {{accessToken}}
+    disabled: true
+order: 1792480481713
