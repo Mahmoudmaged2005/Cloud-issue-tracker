@@ -1,10 +1,58 @@
-[ 
-   { 
-     "id": "ISS-101", 
-     "title": "Unable to access Wi-Fi", 
-     "description": "Connection fails in the teaching lab.", 
-     "priority": "High", 
-     "status": "Open", 
-     "createdAt": "2026-09-01T09:00:00.000Z" 
-   } 
- ] 
+[
+  {
+    "id": "ISS-101",
+    "title": "Unable to access Wi-Fi",
+    "description": "Connection fails in the teaching lab.",
+    "priority": "High",
+    "status": "Open",
+    "createdAt": "2026-09-01T09:00:00.000Z"
+  },
+  {
+    "id": "d8b17733-3408-4b0f-a980-4804362edb25",
+    "title": "Printer unavailable",
+    "description": "The shared printer is not responding.",
+    "priority": "Medium",
+    "status": "Open",
+    "createdAt": "2026-10-20T07:11:36.707Z"
+  },
+  {
+    "id": "a7dc54be-1e5c-4b12-a772-10ea5c0487d3",
+    "title": "Printer unavailable",
+    "description": "The shared printer is not responding.",
+    "priority": "Medium",
+    "status": "Open",
+    "createdAt": "2026-10-20T07:11:46.544Z"
+  },
+  {
+    "id": "ae7b1968-445c-46cf-b057-6e7ccb7ad1a5",
+    "title": "Printer unavailable",
+    "description": "The shared printer is not responding.",
+    "priority": "Medium",
+    "status": "Open",
+    "createdAt": "2026-10-20T07:12:22.730Z"
+  },
+  {
+    "id": "dfd4fc27-8759-4f5b-9b13-a7c89e87df70",
+    "title": "Printer unavailable",
+    "description": "The shared printer is not responding.",
+    "priority": "Medium",
+    "status": "Open",
+    "createdAt": "2026-10-20T07:12:38.822Z"
+  },
+  {
+    "id": "510453f8-928a-44c7-85bc-7b8e4ccb4b0a",
+    "title": "Printer unavailable",
+    "description": "The shared printer is not responding.",
+    "priority": "Medium",
+    "status": "Resolved",
+    "createdAt": "2026-10-20T07:21:18.578Z"
+  },
+  {
+    "id": "7c438f8b-13f4-4dad-8065-f295cf19e60d",
+    "title": "Printer unavailable",
+    "description": "The shared printer is not responding.",
+    "priority": "Medium",
+    "status": "Open",
+    "createdAt": "2026-10-20T07:45:10.554Z"
+  }
+]

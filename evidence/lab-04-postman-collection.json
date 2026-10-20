@@ -1,0 +1,142 @@
+{
+  "info": {
+    "_postman_id": "cc2d72c8-77fc-43b7-89e1-30cb4b278fb0",
+    "name": "Cloud Issue Tracker API - Lab 4",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "View issues",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{BASE_URL}}/api/issues",
+          "host": ["{{BASE_URL}}"],
+          "path": ["api", "issues"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create issue",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Printer unavailable\",\n  \"description\": \"The shared printer is not responding.\",\n  \"priority\": \"Medium\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{BASE_URL}}/api/issues",
+          "host": ["{{BASE_URL}}"],
+          "path": ["api", "issues"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Change issue status",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"status\": \"Resolved\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{BASE_URL}}/api/issues/510453f8-928a-44c7-85bc-7b8e4ccb4b0a/status",
+          "host": ["{{BASE_URL}}"],
+          "path": [
+            "api",
+            "issues",
+            "510453f8-928a-44c7-85bc-7b8e4ccb4b0a",
+            "status"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Reject invalid priority (400)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Printer unavailable\",\n  \"description\": \"The shared printer is not responding.\",\n  \"priority\": \"Urgent\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{BASE_URL}}/api/issues",
+          "host": ["{{BASE_URL}}"],
+          "path": ["api", "issues"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Reject unknown issue (404)",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"status\": \"Resolved\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{BASE_URL}}/api/issues/does-not-exist/status",
+          "host": ["{{BASE_URL}}"],
+          "path": ["api", "issues", "does-not-exist", "status"]
+        }
+      },
+      "response": []
+    }
+  ],
+  "variable": [
+    {
+      "key": "BASE_URL",
+      "value": "http://localhost:3000",
+      "type": "string"
+    }
+  ]
+}
