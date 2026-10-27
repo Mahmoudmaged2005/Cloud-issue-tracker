@@ -1,0 +1,11 @@
+CREATE TABLE IF NOT EXISTS issues (
+  id UUID PRIMARY KEY,
+  title VARCHAR(100) NOT NULL,
+  description VARCHAR(500) NOT NULL,
+  priority TEXT NOT NULL CHECK (priority IN ('Low', 'Medium', 'High')),
+  status TEXT NOT NULL DEFAULT 'Open' CHECK (status IN ('Open', 'Resolved')),
+  created_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+ALTER TABLE issues
+ADD COLUMN IF NOT EXISTS created_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP;

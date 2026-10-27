@@ -1,52 +1,67 @@
-const fs = require('fs/promises');
-const path = require('path');
 const { randomUUID } = require('crypto');
+const { neon } = require('@neondatabase/serverless');
 
-const DATA_FILE = path.join(__dirname, '../data/issues.json');
-
-async function readIssues() {
-  try {
-    const text = await fs.readFile(DATA_FILE, 'utf-8');
-    return JSON.parse(text);
-  } catch (error) {
-    if (error.code === 'ENOENT') {
-      return [];
-    }
-    throw error;
+function getSql() {
+  if (!process.env.DATABASE_URL) {
+    throw new Error('DATABASE_URL is not configured.');
   }
+
+  return neon(process.env.DATABASE_URL);
 }
 
-async function writeIssues(issues) {
-  await fs.writeFile(DATA_FILE, JSON.stringify(issues, null, 2));
+function toIssue(row) {
+  return {
+    id: String(row.id),
+    title: row.title,
+    description: row.description,
+    priority: row.priority,
+    status: row.status,
+    createdAt: new Date(row.created_at).toISOString()
+  };
+}
+
+async function readIssues() {
+  const sql = getSql();
+  const rows = await sql`
+    SELECT id, title, description, priority, status, created_at
+    FROM issues
+    ORDER BY created_at DESC
+  `;
+
+  return rows.map(toIssue);
 }
 
 async function createIssue(input) {
-  const issues = await readIssues();
-  const newIssue = {
-    id: randomUUID(),
-    title: input.title.trim(),
-    description: input.description.trim(),
-    priority: input.priority,
-    status: 'Open',
-    createdAt: new Date().toISOString()
-  };
+  const sql = getSql();
+  const [row] = await sql`
+    INSERT INTO issues (id, title, description, priority, status)
+    VALUES (
+      ${randomUUID()},
+      ${input.title.trim()},
+      ${input.description.trim()},
+      ${input.priority},
+      'Open'
+    )
+    RETURNING id, title, description, priority, status, created_at
+  `;
 
-  issues.push(newIssue);
-  await writeIssues(issues);
-  return newIssue;
+  return toIssue(row);
 }
 
 async function updateIssueStatus(id, status) {
-  const issues = await readIssues();
-  const issue = issues.find((item) => item.id === id);
-
-  if (!issue) {
+  if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(id)) {
     return null;
   }
 
-  issue.status = status;
-  await writeIssues(issues);
-  return issue;
+  const sql = getSql();
+  const [row] = await sql`
+    UPDATE issues
+    SET status = ${status}
+    WHERE id = ${id}
+    RETURNING id, title, description, priority, status, created_at
+  `;
+
+  return row ? toIssue(row) : null;
 }
 
 module.exports = {
